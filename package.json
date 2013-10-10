@@ -1,0 +1,23 @@
+{
+  "name": "contribs",
+  "description": "Contributions and interests",
+  "version": "0.0.1",
+  "scripts": {
+    "test": "jake test",
+    "dev": "geddy -e development",
+    "prod": "geddy -e production"
+  },
+  "private": true,
+  "author": "Robert Kowalski <rok@kowalski.gd>",
+  "dependencies": {
+  },
+  "devDependencies": {
+    "jake": "~0.7.2"
+  },
+  "bundleDependencies": [
+  ],
+  "license": "BSD",
+  "engines": {
+    "node": "0.8.x"
+  }
+}
