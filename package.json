@@ -3,7 +3,7 @@
   "description": "Contributions and interests",
   "version": "0.0.1",
   "scripts": {
-    "test": "jake test",
+    "test": "geddy jake test",
     "dev": "geddy -e development",
     "prod": "geddy -e production"
   },
