@@ -1,9 +1,5 @@
 var config = {
-  /*
-  metrics: {
-    port: 4001
-  }
-  */
+  siteName: 'Contributions and Interests'
 };
 
 module.exports = config;
