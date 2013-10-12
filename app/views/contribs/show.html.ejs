@@ -1,5 +1,5 @@
 <div class="hero-unit">
-  <h2 class="title"><%= contrib.title %></h2>
+  <h2 class="title"><%- contrib.title %></h2>
 </div>
 
 <h2><%= contrib.title %></h2>
@@ -10,6 +10,9 @@
     </p>
     <p>
       This <strong>contribution</strong> is by <strong><%= contrib.contributor %></strong>
+    <p>
+    <p>
+      <%- contrib.karmas && contrib.karmas.length || 0 %> Votes
     <p>
   </div>
   <div class="span4">
@@ -32,9 +35,8 @@
         $.ajax({
           type: 'POST',
           url: '/karmas',
-          contentType: 'application/json; charset=utf-8',
           dataType: 'json',
-          data: { contrib_id: id },
+          data: { contribId: id },
           success: function (data) {
             console.log(data);
           },

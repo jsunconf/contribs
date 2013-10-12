@@ -4,9 +4,8 @@ var Contribs = function () {
   this.index = function (req, resp, params) {
     var self = this;
 
-    geddy.model.Contrib.all({}, {includes: 'karma', limit: 300},
+    geddy.model.Contrib.all({}, {limit: 300},
       function(err, contribs) {
-        //geddy.log.debug(JSON.stringify(contribs[0].karmas.length))
         self.respondWith(contribs, {type:'Contrib'});
     });
   };
@@ -30,7 +29,7 @@ var Contribs = function () {
   this.show = function (req, resp, params) {
     var self = this;
 
-    geddy.model.Contrib.first(params.id, function(err, contrib) {
+    geddy.model.Contrib.first(params.id, {includes: ['karmas']}, function(err, contrib) {
       if (err) {
         throw err;
       }

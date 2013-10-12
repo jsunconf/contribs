@@ -11,12 +11,9 @@ var Karmas = function () {
   };
 
   this.create = function (req, resp, params) {
+    params.date = new Date();
     var self = this
       , karma = geddy.model.Karma.create(params);
-
-    karma.once('beforeSave', function() {
-      karma.date = new Date();
-    });
 
     karma.save(function(err, data) {
       if (err) {
