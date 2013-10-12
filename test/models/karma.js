@@ -1,6 +1,7 @@
 var assert = require('assert')
   , tests
-  , Karma = geddy.model.Karma;
+  , Karma = geddy.model.Karma
+  , testConfig = require('../test-helper.js');
 
 tests = {
   'simple test if the model saves without a error': function (next) {
@@ -9,7 +10,7 @@ tests = {
       assert.equal(err, null);
       next();
     });
-  }
+  },
 };
 
 module.exports = tests;

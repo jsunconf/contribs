@@ -1,0 +1,15 @@
+[{
+  "title": "npm",
+  "contributor": "Robert Kowalski",
+  "description": "The future of npm"
+},
+{
+  "title": "JavaScript Patterns",
+  "contributor": "Rocko Artischocko",
+  "description": "Useful JavaScript Patterns for the JS developer"
+},
+{
+  "title": "ES6 Features you can use today",
+  "contributor": "Rocko Artischocko",
+  "description": "Another great talk"
+}]

@@ -16,7 +16,10 @@ var init = function(cb) {
     return cb();
   }
 
-  testHelper.createContribAndSave(cb);
+  testHelper.cleanUp(function () {
+    testHelper.seedDb(cb);
+  });
+
 };
 
 exports.init = init;
