@@ -4,8 +4,10 @@ var Contribs = function () {
   this.index = function (req, resp, params) {
     var self = this;
 
-    geddy.model.Contrib.all({}, {limit: 300}, function(err, contribs) {
-      self.respondWith(contribs, {type:'Contrib'});
+    geddy.model.Contrib.all({}, {includes: 'karma', limit: 300},
+      function(err, contribs) {
+        //geddy.log.debug(JSON.stringify(contribs[0].karmas.length))
+        self.respondWith(contribs, {type:'Contrib'});
     });
   };
 

@@ -22,7 +22,16 @@ var config = {
 , hostname: null
 , port: 4000
 , model: {
-    defaultAdapter: 'memory'
+    defaultAdapter: 'postgres'
+  }
+, db: {
+    postgres: {
+        port: 5432
+      , password: 'geddy'
+      , database: 'geddy'
+      , host: 'localhost'
+      , user: 'geddy'
+    }
   }
 , sessions: {
     store: 'memory'

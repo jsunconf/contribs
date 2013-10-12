@@ -10,6 +10,7 @@
   "private": true,
   "author": "Robert Kowalski <rok@kowalski.gd>",
   "dependencies": {
+    "pg": "~2.7.0"
   },
   "devDependencies": {
     "jake": "~0.7.2"

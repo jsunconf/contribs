@@ -4,7 +4,13 @@ var assert = require('assert')
   , testConfig = require('../test-helper.js');
 
 tests = {
+
+  'after': function (next) {
+    next();
+  },
+
   'simple test if the model saves without a error': function (next) {
+
     var karma = Karma.create({date: new Date()});
     karma.save(function (err, data) {
       assert.equal(err, null);

@@ -7,6 +7,11 @@ var assert = require('assert')
   , createContribAndSave = testConfig.createContribAndSave;
 
 tests = {
+
+  'after': function (next) {
+    next();
+  },
+
   'Talks must have a title, description and an contributor field': function (next) {
     var c = createContrib();
     c.save(function (err, data) {
@@ -64,15 +69,13 @@ tests = {
 
   'A contrib has many karmas': function (next) {
     createContribAndSave(function (err, c) {
-      Contrib.first(function (err, c) {
-        c.addKarma(Karma.create({date: new Date()}));
-        c.addKarma(Karma.create({date: new Date()}));
-        c.save(function (err, data) {
-          Contrib.first({id: c.id }, function (err, result) {
-            result.getKarmas(function (err, data) {
-              assert.equal(2, data.length);
-              next();
-            });
+      c.addKarma(Karma.create({date: new Date()}));
+      c.addKarma(Karma.create({date: new Date()}));
+      c.save(function (err, data) {
+        Contrib.first({id: c.id }, function (err, result) {
+          result.getKarmas(function (err, data) {
+            assert.equal(2, data.length);
+            next();
           });
         });
       });
