@@ -1,0 +1,19 @@
+<div class="hero-unit">
+  <h2>All Contribs</h2>
+  <%- linkTo('Create a new Contrib', addContribPath, {class: 'btn pull-right'}); %>
+</div>
+
+<div id="contribs-list">
+<% if (contribs) { %>
+<% for (var i = 0, ii = contribs.length; i < ii; i++) { %>
+  <div class="row list-item" id="contrib-<%= contribs[i].id; %>">
+    <div class="span8">
+      <h3><%- linkTo(contribs[i].title, contribPath(contribs[i].id)); %></h3>
+    </div>
+    <div class="span4">
+      <h3><i class="icon-list-alt"></i><%= contribs[i].id; %></h3>
+    </div>
+  </div>
+<% } %>
+<% } %>
+</div>

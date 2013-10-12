@@ -1,0 +1,48 @@
+<div class="hero-unit">
+  <h2 class="title"><%= contrib.title %></h2>
+</div>
+
+<h2><%= contrib.title %></h2>
+<div class="row">
+  <div class="span8">
+    <p>
+      <%= contrib.description %>
+    </p>
+    <p>
+      This <strong>contribution</strong> is by <strong><%= contrib.contributor %></strong>
+    <p>
+  </div>
+  <div class="span4">
+    <a id="vote-for-talk-link" data-contrib-id="<%- contrib.id %>" style="font-size: 36px;" href="javascript:">&hearts; vote</a>
+    <div id="thanks-voted" class="hidden">Thanks for your vote!</div>
+    <script>
+      var $voteForYourTalk = $('#vote-for-talk-link'),
+          $thanksVoted = $('#thanks-voted');
+
+      $voteForYourTalk.on('click', function (e) {
+        e && e.preventDefault();
+        var $this = $(this),
+            id = $this.data('contrib-id');
+
+        $this.fadeOut(function () {
+          $this.remove();
+          $thanksVoted.toggleClass('hidden');
+        });
+
+        $.ajax({
+          type: 'POST',
+          url: '/karmas',
+          contentType: 'application/json; charset=utf-8',
+          dataType: 'json',
+          data: { contrib: id },
+          success: function (data) {
+            console.log(data);
+          },
+          error: function () {
+
+          }
+        });
+      });
+    </script>
+  </div>
+</div>

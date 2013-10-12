@@ -1,14 +1,11 @@
 <%= partial('layout_header'); %>
   <body>
-    <div class="navbar navbar-fixed-top">
+    <div class="navbar">
       <div class="navbar-inner">
         <div class="container">
-          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-            <span class="i-bar"><i class="icon-chevron-down icon-white"></i></span>
-          </a>
           <div class="nav-collapse">
             <ul class="nav">
-              <li class="active">Hello.</li>
+              <li><%- linkTo('Contribs', contribsPath) %></li>
               <li><%- linkTo('Imprint', imprintsPath) %></li>
             </ul>
           </div><!--/.nav-collapse -->

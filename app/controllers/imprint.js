@@ -10,5 +10,3 @@ var Imprint = function () {
 };
 
 exports.Imprint = Imprint;
-
-

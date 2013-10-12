@@ -1,3 +1,5 @@
+var testHelper = require('../test/test-helper.js');
+
 var init = function(cb) {
   // Add uncaught-exception handler in prod-like environments
   if (geddy.config.environment != 'development') {
@@ -11,8 +13,10 @@ var init = function(cb) {
       }
       geddy.log.error(msg);
     });
+    return cb();
   }
-  cb();
+
+  testHelper.createContribAndSave(cb);
 };
 
 exports.init = init;

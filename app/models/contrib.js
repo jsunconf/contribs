@@ -1,4 +1,3 @@
-(function () {
 var Contrib = function () {
 
   this.defineProperties({
@@ -19,16 +18,3 @@ var Contrib = function () {
 };
 
 Contrib = geddy.model.register('Contrib', Contrib);
-}());
-
-(function () {
-var Karma = function () {
-
-  this.defineProperties({
-    date: {type: 'date'}
-  });
-
-};
-
-Karma = geddy.model.register('Karma', Karma);
-}());

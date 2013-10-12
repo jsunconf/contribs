@@ -37,5 +37,9 @@ var router = new geddy.RegExpRouter();
 //   this.get('/print(.:format)').to('Hemispheres.print');
 // });
 
+router.get('/').to('Main.index');
 router.get('/imprint').to('Imprint.index');
+
+router.resource('contribs');
+router.resource('karmas');
 exports.router = router;
