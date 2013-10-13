@@ -12,7 +12,7 @@
       This <strong>contribution</strong> is by <strong><%= contrib.contributor %></strong>
     <p>
     <p>
-      <%- contrib.karmas && contrib.karmas.length || 0 %> Votes
+      <span id="votes"><%= contrib.karmas && contrib.karmas.length || 0 %></span> Votes
     <p>
   </div>
   <div class="span4">
@@ -20,7 +20,8 @@
     <div id="thanks-voted" class="hidden">Thanks for your vote!</div>
     <script>
       var $voteForYourTalk = $('#vote-for-talk-link'),
-          $thanksVoted = $('#thanks-voted');
+          $thanksVoted = $('#thanks-voted'),
+          $votes = $('#votes');
 
       $voteForYourTalk.on('click', function (e) {
         e && e.preventDefault();
@@ -32,13 +33,19 @@
           $thanksVoted.toggleClass('hidden');
         });
 
+
+
         $.ajax({
           type: 'POST',
           url: '/karmas',
           dataType: 'json',
           data: { contribId: id },
           success: function (data) {
-            console.log(data);
+            // fake vote count raise - until we have websocket support
+            var count = +$votes.text();
+            count = count + 1;
+            $votes.text(count);
+            console.log(count);
           },
           error: function () {
 
