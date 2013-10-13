@@ -29,7 +29,8 @@ var Contribs = function () {
   this.show = function (req, resp, params) {
     var self = this;
 
-    geddy.model.Contrib.first(params.id, {includes: ['karmas']}, function(err, contrib) {
+    geddy.model.Contrib.first(params.id, {include: ['karmas']},
+        function (err, contrib) {
       if (err) {
         throw err;
       }
@@ -37,7 +38,15 @@ var Contribs = function () {
         throw new geddy.errors.NotFoundError();
       }
       else {
-        self.respondWith(contrib);
+        if (!contrib.interestId) {
+          self.respondWith(contrib);
+        } else {
+          geddy.model.Interest.first(contrib.interestId,
+              function (er, interest) {
+            contrib.interest = interest;
+            self.respondWith(contrib);
+          });
+        }
       }
     });
   };

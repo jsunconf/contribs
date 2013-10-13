@@ -49,11 +49,32 @@ function createContribOrInterestWithRandomKarma (data, name, cb) {
   });
 }
 
-
 function seed (cb) {
   var contribsCopy = contribs.slice();
   var interestsCopy = interests.slice();
   var listCopy = fixtures.slice();
+
+  var assignContribsToInterests = function (cb) {
+    Interest.all(function (err, interests) {
+      Contrib.all(function (err, data) {
+        var addContrib = function () {
+          var interest = interests.shift();
+          if (interest) {
+            var contrib = contribs.shift();
+            Contrib.load(contrib.id, function (err, c) {
+              Interest.load(interest.id, function (err, i) {
+                i.addContrib(c);
+                i.save(addContrib);
+              });
+            });
+          } else {
+            cb();
+          }
+        };
+        addContrib();
+      });
+    });
+  };
 
   var runner = function (fixtures, list) {
     var f = fixtures.shift();
@@ -71,7 +92,7 @@ function seed (cb) {
     if (f) {
       doIt();
     } else {
-      cb();
+      assignContribsToInterests(cb);
     }
   };
   runner([contribsCopy, interestsCopy], listCopy);

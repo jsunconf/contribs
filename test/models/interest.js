@@ -94,6 +94,21 @@ tests = {
     });
   },
 
+  'An Interest has many contribs': function (next) {
+    createItemAndSave(null, 'Interest', function (err, c) {
+      c.addContrib(createItem(null, 'Contrib'));
+      c.addContrib(createItem(null, 'Contrib'));
+      c.save(function (err, data) {
+        Interest.first({id: c.id }, function (err, result) {
+          result.getContribs(function (err, data) {
+            assert.equal(2, data.length);
+            next();
+          });
+        });
+      });
+    });
+  },
+
 };
 
 module.exports = tests;

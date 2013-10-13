@@ -1,5 +1,5 @@
 var config = {
-  siteName: 'Contributions and Interests'
+  siteName: 'Contribs and Interests'
 };
 
 module.exports = config;

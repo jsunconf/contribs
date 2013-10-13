@@ -15,7 +15,7 @@ var Interest = function () {
   this.validatesLength('description', {min: 10});
 
   this.hasMany('Karmas');
-
+  this.hasMany('Contribs');
 };
 
 

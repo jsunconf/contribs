@@ -15,6 +15,7 @@ var Contrib = function () {
   this.validatesLength('description', {min: 10});
 
   this.hasMany('Karmas');
+  this.hasOne('Interests');
 };
 
 Contrib = geddy.model.register('Contrib', Contrib);

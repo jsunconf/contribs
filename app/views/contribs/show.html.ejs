@@ -14,6 +14,11 @@
     <p>
       <span id="votes"><%= contrib.karmas && contrib.karmas.length || 0 %></span> Votes
     <p>
+    <% if (contrib.interest) { %>
+    <p>
+      This is a response to the request <%- contrib.interest.title %> from <%- contrib.interest.prospect %>
+    </p>
+    <% } %>
   </div>
   <div class="span4">
     <a id="vote-for-talk-link" data-contrib-id="<%- contrib.id %>" style="font-size: 36px;" href="javascript:">&hearts; vote</a>

@@ -82,6 +82,19 @@ tests = {
     });
   },
 
+  'A contrib can belong to an Interest': function (next) {
+    createItemAndSave(null, 'Interest', function (err, i) {
+      var item = createItem(null, 'Contrib');
+      i.addContrib(item);
+      i.save(function (err, data) {
+        Contrib.first({id: item.id }, function (err, result) {
+          assert.ok(result.interestId);
+          next();
+        });
+      });
+    });
+  }
+
 };
 
 module.exports = tests;
