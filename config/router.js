@@ -42,4 +42,5 @@ router.get('/imprint').to('Imprint.index');
 
 router.resource('contribs');
 router.resource('karmas');
+router.resource('interests');
 exports.router = router;
