@@ -3,8 +3,8 @@ var assert = require('assert')
   , Contrib = geddy.model.Contrib
   , Karma = geddy.model.Karma
   , testConfig = require('../test-helper.js')
-  , createContrib = testConfig.createContrib
-  , createContribAndSave = testConfig.createContribAndSave;
+  , createItem = testConfig.createItem
+  , createItemAndSave = testConfig.createItemAndSave;
 
 tests = {
 
@@ -13,7 +13,7 @@ tests = {
   },
 
   'Talks must have a title, description and an contributor field': function (next) {
-    var c = createContrib();
+    var c = createItem(null, 'Contrib');
     c.save(function (err, data) {
       assert.equal(null, err);
       next();
@@ -68,7 +68,7 @@ tests = {
   },
 
   'A contrib has many karmas': function (next) {
-    createContribAndSave(function (err, c) {
+    createItemAndSave(null, 'Contrib', function (err, c) {
       c.addKarma(Karma.create({date: new Date()}));
       c.addKarma(Karma.create({date: new Date()}));
       c.save(function (err, data) {

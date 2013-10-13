@@ -2,7 +2,12 @@ var Interests = function () {
   this.respondsWith = ['html', 'json', 'xml', 'js', 'txt'];
 
   this.index = function (req, resp, params) {
-    this.respond({params: params});
+   var self = this;
+
+    geddy.model.Interest.all({}, {limit: 300},
+      function(err, interests) {
+        self.respondWith(interests, {type: 'Interest'});
+    });
   };
 
   this.add = function (req, resp, params) {

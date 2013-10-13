@@ -43,15 +43,15 @@ var Contribs = function () {
   };
 
   this.edit = function (req, resp, params) {
-    throw new Error("Not implemented");
+    throw new geddy.errors.NotFoundError();
   };
 
   this.update = function (req, resp, params) {
-    throw new Error("Not implemented");
+    throw new geddy.errors.NotFoundError();
   };
 
   this.remove = function (req, resp, params) {
-    throw new Error("Not implemented");
+    throw new geddy.errors.NotFoundError();
   };
 
 };

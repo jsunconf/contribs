@@ -33,8 +33,6 @@
           $thanksVoted.toggleClass('hidden');
         });
 
-
-
         $.ajax({
           type: 'POST',
           url: '/karmas',
@@ -45,7 +43,6 @@
             var count = +$votes.text();
             count = count + 1;
             $votes.text(count);
-            console.log(count);
           },
           error: function () {
 

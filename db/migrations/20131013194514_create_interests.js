@@ -3,7 +3,7 @@ var CreateInterests = function () {
     var def = function (t) {
           t.column('title', 'string');
           t.column('prospect', 'string');
-          t.column('description', 'string');
+          t.column('description', 'text');
         }
       , callback = function (err, data) {
           if (err) {

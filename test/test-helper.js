@@ -1,33 +1,44 @@
 var Contrib = geddy.model.Contrib
   , Karma = geddy.model.Karma
-  , fixtures = require('./fixtures/Contrib.json');
+  , Interest = geddy.model.Interest
+  , fixtures = ['Contrib', 'Interest']
+  , contribs = require('./fixtures/Contrib.json')
+  , interests = require('./fixtures/Interest.json')
+  , fixtureObj = {
+    'Contrib': contribs,
+    'Interest': interests
+  };
 
-exports.createContrib = createContrib;
-exports.createContribAndSave = createContribAndSave;
+exports.createItem = createItem;
+exports.createItemAndSave = createItemAndSave;
 exports.seedDb = seed;
 exports.cleanUp = cleanUp;
 
 
-function createContrib (data) {
+function createItem (data, name) {
+  var i;
   if (!data) {
-    data = fixtures[0];
+    data = fixtureObj[name][0];
   }
-  c = Contrib.create(data);
-  return c;
+  i = geddy.model[name].create(data);
+  return i;
 }
 
-function createContribAndSave (data, cb) {
+function createItemAndSave (data, name, cb) {
+  var c;
   if (typeof data == 'function') {
     cb = data;
-    c = createContrib();
-  } else {
-    c = createContrib(data);
+    c = createItem(null, name);
+  } else if (data === null) {
+    c = createItem(null, name);
+  } else {
+    c = createItem(data, name);
   }
   c.save(cb);
 }
 
-function createContribWithRandomKarma (data, cb) {
-  createContribAndSave(data, function (err, c) {
+function createContribOrInterestWithRandomKarma (data, name, cb) {
+  createItemAndSave(data, name, function (err, c) {
     var count = ~~(Math.random(0, 10) * 200);
     for (var i = 0; i < count; i++) {
       c.addKarma(Karma.create({date: new Date()}));
@@ -40,20 +51,34 @@ function createContribWithRandomKarma (data, cb) {
 
 
 function seed (cb) {
-  var fixtureCopy = fixtures.slice();
-  var doIt = function () {
-    var fixture = fixtureCopy.shift();
-    if (fixture) {
-      createContribWithRandomKarma(fixture, doIt);
+  var contribsCopy = contribs.slice();
+  var interestsCopy = interests.slice();
+  var listCopy = fixtures.slice();
+
+  var runner = function (fixtures, list) {
+    var f = fixtures.shift();
+    var name = list.shift();
+    var doIt = function () {
+      var fixture = f.shift();
+      if (fixture) {
+        createContribOrInterestWithRandomKarma(fixture, name, doIt);
+      } else {
+        if (fixtures) {
+          return runner(fixtures, list)
+        }
+      }
+    }
+    if (f) {
+      doIt();
     } else {
       cb();
     }
-  }
-  doIt();
+  };
+  runner([contribsCopy, interestsCopy], listCopy);
 }
 
 function cleanUp (cb) {
-  var relations = [Contrib, Karma];
+  var relations = [Contrib, Karma, Interest];
   var doIt = function () {
     var relation = relations.shift();
     if (relation) {
