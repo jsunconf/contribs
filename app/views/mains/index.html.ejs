@@ -1,14 +1,22 @@
-<div id="contribs-list">
-<% if (contribs) { %>
-<% for (var i = 0, ii = contribs.length; i < ii; i++) { %>
-  <div class="row list-item" id="contrib-<%= contribs[i].id; %>">
-    <div class="span2">
+
+<div class="span6">
+  <h2>Contribs</h2>
+  <% if (contribs) { %>
+  <% for (var i = 0, ii = contribs.length; i < ii; i++) { %>
+    <div class="">
       <h3><%- linkTo(contribs[i].title, contribPath(contribs[i].id)); %></h3>
     </div>
-    <div class="span8">
-      <h3><i class="icon-list-alt"></i><%= contribs[i].id; %></h3>
+  <% } %>
+  <% } %>
+</div>
+
+<div class="col-md-6 col-md-offset-6">
+  <h2>Interests</h2>
+  <% if (interests) { %>
+  <% for (var i = 0, ii = interests.length; i < ii; i++) { %>
+    <div class="">
+      <h3><%- linkTo(interests[i].title, interestPath(interests[i].id)); %></h3>
     </div>
-  </div>
-<% } %>
-<% } %>
+  <% } %>
+  <% } %>
 </div>

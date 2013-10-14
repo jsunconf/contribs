@@ -2,10 +2,14 @@ var Main = function () {
   this.canRespondTo(['html']);
 
   this.index = function (req, resp, params) {
-    var self = this;
+    var self = this,
+        Contrib = geddy.model.Contrib,
+        Interest = geddy.model.Interest;
 
-    geddy.model.Contrib.all(function(err, contribs) {
-      self.respondWith(contribs, {type:'Contrib'});
+    Contrib.all(function(err, contribs) {
+      Interest.all(function(err, interests) {
+        self.respond({contribs: contribs,  interests: interests});
+      });
     });
   };
 };
