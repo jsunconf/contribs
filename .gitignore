@@ -13,3 +13,9 @@ lib-cov
 secrets.json
 
 log/*
+
+node_modules/jake
+node_modules/.bin/jake
+node_modules/.bin/lessc
+node_modules/less
+node_modules/grunt*

@@ -13,7 +13,12 @@
     "pg": "~2.7.0"
   },
   "devDependencies": {
-    "jake": "~0.7.2"
+    "jake": "~0.7.2",
+    "less": "~1.4.2",
+    "grunt": "~0.4.1",
+    "grunt-contrib-less": "~0.7.0",
+    "grunt-contrib-uglify": "~0.2.4",
+    "grunt-contrib-watch": "~0.5.3"
   },
   "bundleDependencies": [],
   "license": "BSD",
