@@ -21,39 +21,7 @@
     <% } %>
   </div>
   <div class="span4">
-    <a id="vote-for-talk-link" data-contrib-id="<%- contrib.id %>" style="font-size: 36px;" href="javascript:">&hearts; vote</a>
+    <a id="vote-for-link" data-contrib-id="<%- contrib.id %>" style="font-size: 36px;" href="javascript:">&hearts; vote</a>
     <div id="thanks-voted" class="hidden">Thanks for your vote!</div>
-    <script>
-      var $voteForYourTalk = $('#vote-for-talk-link'),
-          $thanksVoted = $('#thanks-voted'),
-          $votes = $('#votes');
-
-      $voteForYourTalk.on('click', function (e) {
-        e && e.preventDefault();
-        var $this = $(this),
-            id = $this.data('contrib-id');
-
-        $this.fadeOut(function () {
-          $this.remove();
-          $thanksVoted.toggleClass('hidden');
-        });
-
-        $.ajax({
-          type: 'POST',
-          url: '/karmas',
-          dataType: 'json',
-          data: { contribId: id },
-          success: function (data) {
-            // fake vote count raise - until we have websocket support
-            var count = +$votes.text();
-            count = count + 1;
-            $votes.text(count);
-          },
-          error: function () {
-
-          }
-        });
-      });
-    </script>
   </div>
 </div>
