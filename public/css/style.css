@@ -37,3 +37,7 @@ code {
 .hidden {
   display: none;
 }
+
+#vote-for-link {
+  font-size: 36px;
+}

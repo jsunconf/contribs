@@ -1,0 +1,24 @@
+<h2><%= interest.title %></h2>
+<div class="row">
+  <div class="span8">
+    <p>
+      <%= interest.description %>
+    </p>
+    <p>
+      This <strong>interest</strong> is by <strong><%= interest.prospect %></strong>
+    <p>
+    <p>
+      <span id="votes"><%= interest.karmas && interest.karmas.length || 0 %></span> Votes
+    <p>
+    <% if (interest.contribs) { %>
+    <p>
+      </h3>This interest got responses:</h3>
+      <% for (var i = 0, ii = interest.contribs.length; i < ii; i++) { %>
+        <% var linktitle = interest.contribs[i].title + ' by ' + interest.contribs[i].contributor; %>
+        <%- linkTo(linktitle, contribPath(interest.contribs[i].id)); %>
+      <% } %>
+    </p>
+    <% } %>
+  </div>
+  <%= partial('shared/_votes', {params: {id : interest.id}}) %>
+</div>
