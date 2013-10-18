@@ -20,7 +20,11 @@ var config = {
   detailedErrors: true
 , debug: true
 , hostname: null
-, port: 4000
+, recaptcha: {
+    publicKey: process.env.RECAPTCHA_PUBLIC
+  , privateKey: process.env.RECAPTCHA_PRIVATE
+  }
+, port: process.env.PORT || 4000
 , model: {
     defaultAdapter: 'postgres'
   }
