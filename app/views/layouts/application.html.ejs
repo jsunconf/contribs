@@ -1,20 +1,17 @@
 <%= partial('layout_header'); %>
   <body>
-    <div class="navbar">
-      <div class="navbar-inner">
-        <div class="container">
-          <div class="nav-collapse">
-            <ul class="nav">
-              <li><%- linkTo('Main', mainsPath) %></li>
-              <li><%- linkTo('Contribs', contribsPath) %></li>
-              <li><%- linkTo('Interests', interestsPath) %></li>
-              <li><%- linkTo('Imprint', imprintsPath) %></li>
-            </ul>
-          </div><!--/.nav-collapse -->
+    <div class="container">
+
+      <div class="navbar navbar-default">
+        <div class="navbar-inner">
+          <ul class="nav navbar-nav">
+            <li><%- linkTo('Main', mainsPath) %></li>
+            <li><%- linkTo('Contribs', contribsPath) %></li>
+            <li><%- linkTo('Interests', interestsPath) %></li>
+            <li><%- linkTo('Imprint', imprintsPath) %></li>
+          </ul>
         </div>
       </div>
-    </div>
-    <div class="container">
       <%- displayFlash(flash); %>
       <%- render(); %>
     </div>
