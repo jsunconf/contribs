@@ -4,9 +4,10 @@ var Contribs = function () {
   this.respondsWith = ['html', 'json', 'xml', 'js', 'txt'];
 
   this.index = function (req, resp, params) {
-    var self = this;
+    var self = this
+      , Contrib = geddy.model.Contrib;
 
-    geddy.model.Contrib.all({}, {limit: 300},
+    Contrib.all({}, {limit: 300},
       function(err, contribs) {
         self.respondWith(contribs, {type:'Contrib'});
     });
@@ -45,9 +46,10 @@ var Contribs = function () {
   };
 
   this.show = function (req, resp, params) {
-    var self = this;
+    var self = this
+      , Contrib = geddy.model.Contrib;
 
-    geddy.model.Contrib.first(params.id, {include: ['karmas']},
+    Contrib.first(params.id, {includes: ['karmas']},
         function (err, contrib) {
       if (err) {
         throw err;
@@ -62,25 +64,13 @@ var Contribs = function () {
           geddy.model.Interest.first(contrib.interestId,
               function (er, interest) {
             contrib.interest = interest;
+            geddy.log.debug(JSON.stringify(contrib))
             self.respondWith(contrib, {status: er});
           });
         }
       }
     });
   };
-
-  this.edit = function (req, resp, params) {
-    throw new geddy.errors.NotFoundError();
-  };
-
-  this.update = function (req, resp, params) {
-    throw new geddy.errors.NotFoundError();
-  };
-
-  this.remove = function (req, resp, params) {
-    throw new geddy.errors.NotFoundError();
-  };
-
 };
 
 exports.Contribs = Contribs;

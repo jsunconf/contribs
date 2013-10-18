@@ -42,18 +42,6 @@ var Interests = function () {
     });
   };
 
-  this.edit = function (req, resp, params) {
-    throw new geddy.errors.NotFoundError();
-  };
-
-  this.update = function (req, resp, params) {
-    throw new geddy.errors.NotFoundError();
-  };
-
-  this.remove = function (req, resp, params) {
-    throw new geddy.errors.NotFoundError();
-  };
-
 };
 
 exports.Interests = Interests;

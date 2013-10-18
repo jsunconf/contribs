@@ -19,28 +19,19 @@
 
 var router = new geddy.RegExpRouter();
 
-// Basic routes
-// router.match('/moving/pictures/:id', 'GET').to('Moving.pictures');
-//
-// router.match('/farewells/:farewelltype/kings/:kingid', 'GET').to('Farewells.kings');
-//
-// Can also match specific HTTP methods only
-// router.get('/xandadu').to('Xanadu.specialHandler');
-// router.del('/xandadu/:id').to('Xanadu.killItWithFire');
-//
-// Resource-based routes
-// router.resource('hemispheres');
-//
-// Nested Resource-based routes
-// router.resource('hemispheres', function(){
-//   this.resource('countries');
-//   this.get('/print(.:format)').to('Hemispheres.print');
-// });
-
 router.get('/').to('Main.index');
 router.get('/imprint').to('Imprint.index');
 
-router.resource('contribs');
-router.resource('karmas');
-router.resource('interests');
+router.match('/karmas', 'POST').to('karmas.create');
+
+router.match('/contribs', 'GET').to('contribs.index');
+router.match('/contribs/add', 'GET').to('contribs.add');
+router.match('/contribs', 'POST').to('contribs.create');
+router.match('/contribs/:id', 'GET').to('contribs.show');
+
+router.match('/interests', 'GET').to('interests.index');
+router.match('/interests/add', 'GET').to('interests.add');
+router.match('/interests', 'POST').to('interests.create');
+router.match('/interests/:id', 'GET').to('interests.show');
+
 exports.router = router;
