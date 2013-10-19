@@ -19,4 +19,6 @@ node_modules/.bin/jake
 node_modules/.bin/lessc
 node_modules/less
 node_modules/grunt*
+
 public/css/*
+test/bin/selenium-server-standalone-2.37.0.jar

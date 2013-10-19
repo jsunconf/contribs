@@ -7,12 +7,48 @@ var Contrib = geddy.model.Contrib
   , fixtureObj = {
     'Contrib': contribs,
     'Interest': interests
-  };
+  }
+  , spawn = require('child_process').spawn;
 
 exports.createItem = createItem;
 exports.createItemAndSave = createItemAndSave;
 exports.seedDb = seed;
 exports.cleanUp = cleanUp;
+
+exports.selenium = {
+  url: 'http://localhost:4000'
+, createBrowser: ''
+, server: null
+, app: null
+, start: function (cb) {
+    var self = this;
+    this.startSeleniumServer(function () {
+      self.startApp(cb);
+    });
+  }
+, stop: function (cb) {
+    this.app.kill('SIGHUP');
+    this.server.kill();
+    this.app.on('close', cb);
+  }
+, startSeleniumServer: function (cb) {
+    this.server = spawn('java', ['-jar', 'selenium-server-standalone-2.37.0.jar'],
+        {cwd: __dirname + '/bin'});
+    this.server.stdout.on('data', function (data) {
+      if (data.toString().indexOf('Started HttpContext[/wd,/wd]') !== -1) {
+        cb();
+      }
+    });
+  }
+, startApp: function (cb) {
+    this.app = spawn('geddy', ['-e', 'development'], {cwd: __dirname + '/../'});
+    this.app.stdout.on('data', function (data) {
+      if (data.toString().indexOf('Server worker running') !== -1) {
+        cb();
+      }
+    });
+  }
+};
 
 
 function createItem (data, name) {
