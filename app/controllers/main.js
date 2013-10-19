@@ -6,12 +6,13 @@ var Main = function () {
         Contrib = geddy.model.Contrib,
         Interest = geddy.model.Interest;
 
-    Contrib.all(function(err, contribs) {
-      Interest.all(function(err, interests) {
+    Contrib.all(function (err, contribs) {
+      Interest.all(function (err, interests) {
         self.respond({contribs: contribs,  interests: interests});
       });
     });
   };
+
 };
 
 exports.Main = Main;

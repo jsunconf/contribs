@@ -1,5 +1,6 @@
 var config = {
   siteName: 'Contribs and Interests'
+, eventName: 'JS Unconf 2014'
 , flash: {
     defaultClass: 'alert'
   , inlineClasses: {

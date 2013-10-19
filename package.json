@@ -13,7 +13,8 @@
   "author": "Robert Kowalski <rok@kowalski.gd>",
   "dependencies": {
     "pg": "~2.7.0",
-    "recaptcha": "~1.2.0"
+    "recaptcha": "~1.2.0",
+    "feed": "~0.2.5"
   },
   "devDependencies": {
     "jake": "~0.7.2",

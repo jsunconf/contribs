@@ -1,4 +1,6 @@
-var Recaptcha = require('recaptcha').Recaptcha;
+var Recaptcha = require('recaptcha').Recaptcha
+  , createFeed = require(__dirname + '/../../lib/feed.js');
+
 
 var Contribs = function () {
   this.respondsWith = ['html', 'json', 'xml', 'js', 'txt'];
@@ -70,6 +72,18 @@ var Contribs = function () {
       }
     });
   };
+
+  this.xml = function (req, resp, params) {
+    var self = this
+      , Contrib = geddy.model.Contrib
+      , feed;
+
+    Contrib.all(function(err, contribs) {
+      feed = createFeed(contribs);
+      self.output(200, {'Content-Type': 'application/xml'}, feed.render('atom-1.0'));
+    });
+  };
+
 };
 
 exports.Contribs = Contribs;

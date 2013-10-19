@@ -28,10 +28,14 @@ router.match('/contribs', 'GET').to('contribs.index');
 router.match('/contribs/add', 'GET').to('contribs.add');
 router.match('/contribs', 'POST').to('contribs.create');
 router.match('/contribs/:id', 'GET').to('contribs.show');
+router.match('/contribs.xml', 'GET').to('contribs.xml')
+
 
 router.match('/interests', 'GET').to('interests.index');
 router.match('/interests/add', 'GET').to('interests.add');
 router.match('/interests', 'POST').to('interests.create');
 router.match('/interests/:id', 'GET').to('interests.show');
+router.match('/interests.xml', 'GET').to('interests.xml')
+
 
 exports.router = router;

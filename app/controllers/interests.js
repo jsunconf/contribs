@@ -1,3 +1,6 @@
+var Recaptcha = require('recaptcha').Recaptcha
+  , createFeed = require(__dirname + '/../../lib/feed.js');
+
 var Interests = function () {
   this.respondsWith = ['html', 'json', 'xml', 'js', 'txt'];
 
@@ -5,7 +8,7 @@ var Interests = function () {
     var self = this;
 
     geddy.model.Interest.all({}, {limit: 300},
-      function(err, interests) {
+      function (err, interests) {
         self.respondWith(interests, {type: 'Interest'});
     });
   };
@@ -18,7 +21,7 @@ var Interests = function () {
     var self = this
       , interest = geddy.model.Interest.create(params);
 
-    interest.save(function(err, data) {
+    interest.save(function (err, data) {
       if (err) {
         throw err;
       }
@@ -40,6 +43,17 @@ var Interests = function () {
       else {
         self.respondWith(interest);
       }
+    });
+  };
+
+  this.xml = function (req, resp, params) {
+    var self = this
+      , Interest = geddy.model.Interest
+      , feed;
+
+    Interest.all(function (err, interests) {
+      feed = createFeed(interests);
+      self.output(200, {'Content-Type': 'application/xml'}, feed.render('atom-1.0'));
     });
   };
 

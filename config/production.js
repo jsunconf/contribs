@@ -24,6 +24,7 @@ var config = {
   , privateKey: process.env.RECAPTCHA_PRIVATE
   }
 , port: process.env.PORT || 4000
+, domain: 'http://localhost'
 , model: {
     defaultAdapter: 'mongo'
   }

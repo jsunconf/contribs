@@ -15,6 +15,7 @@
  * limitations under the License.
  *
 */
+var port = process.env.PORT || 4000;
 
 var config = {
   detailedErrors: true
@@ -24,7 +25,8 @@ var config = {
     publicKey: process.env.RECAPTCHA_PUBLIC
   , privateKey: process.env.RECAPTCHA_PRIVATE
   }
-, port: process.env.PORT || 4000
+, port: port
+, domain: 'http://localhost:' + port
 , model: {
     defaultAdapter: 'postgres'
   }
