@@ -1,36 +1,25 @@
 ;(function ($, window) {
 
-var $voteForYourTalk = $('#vote-for-link'),
-    $thanksVoted = $('#thanks-voted'),
-    $votes = $('#votes');
+var $votes = $('#votes')
+    $form = $('#form-karma');
 
-$voteForYourTalk.on('click', function (e) {
-  e && e.preventDefault();
-  var $this = $(this),
-      id = $this.data('id'),
-      type = $this.data('type'),
-      data = {};
+$form.on('submit', function (e){
+  e.preventDefault();
 
-  data[type + '_id'] = id;
-
-  $this.fadeOut(function () {
-    $this.remove();
-    $thanksVoted.toggleClass('hidden');
-  });
+  $form
+    .find('button')
+    .html('Thanks &hearts;');
 
   $.ajax({
     type: 'POST',
     url: '/karmas',
     dataType: 'json',
-    data: data,
+    data: $form.serialize(),
     success: function (data) {
       // fake vote count raise - until we have websocket support
       var count = +$votes.text();
       count = count + 1;
       $votes.text(count);
-    },
-    error: function () {
-
     }
   });
 });

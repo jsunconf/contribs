@@ -6,8 +6,9 @@ var Karmas = function () {
     var self = this
       , karma = geddy.model.Karma.create(params);
 
+    var controller = geddy.inflection.pluralize(params.type);
     karma.save(function (err, data) {
-      self.respondWith(karma, {status: err});
+      self.redirect({controller: controller, id: params[params.type + '_id']});
     });
   };
 

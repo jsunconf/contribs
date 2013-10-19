@@ -1,4 +1,7 @@
-<div class="span4">
-  <a id="vote-for-link" data-type="<%- params.type %>" data-id="<%- params.id %>" href="javascript:">&hearts; vote</a>
-  <div id="thanks-voted" class="hidden">Thanks for your vote!</div>
+<div class="col-md-4">
+  <form id="form-karma" action="/karmas/" method="POST">
+    <button id="vote-for-link" type="submit" class="btn btn-primary btn-lg btn-block">&hearts; vote</button>
+    <input type="hidden" name="type" value="<%= params.type %>" />
+    <input type="hidden" name="<%= params.type %>_id" value="<%= params.id %>" />
+  </form>
 </div>
