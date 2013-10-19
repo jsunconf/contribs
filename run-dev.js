@@ -4,7 +4,9 @@ var q = require('async-minihelper');
 var childs = [];
 process.on('exit', function () {
   for (child in childs) {
-    child.kill();
+    try {
+      child.kill();
+    } catch (e) {}
   }
 });
 
