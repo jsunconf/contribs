@@ -6,7 +6,7 @@
     "test": "geddy jake test",
     "unit": "geddy jake test[models]",
     "int": "geddy jake test[integration]",
-    "dev": "geddy -e development",
+    "dev": "node run-dev.js",
     "prod": "geddy -e production"
   },
   "private": true,
