@@ -7,7 +7,11 @@ var $voteForYourTalk = $('#vote-for-link'),
 $voteForYourTalk.on('click', function (e) {
   e && e.preventDefault();
   var $this = $(this),
-      id = $this.data('contrib-id');
+      id = $this.data('id'),
+      type = $this.data('type'),
+      data = {};
+
+  data[type + '_id'] = id;
 
   $this.fadeOut(function () {
     $this.remove();
@@ -18,7 +22,7 @@ $voteForYourTalk.on('click', function (e) {
     type: 'POST',
     url: '/karmas',
     dataType: 'json',
-    data: { contribId: id },
+    data: data,
     success: function (data) {
       // fake vote count raise - until we have websocket support
       var count = +$votes.text();

@@ -27,9 +27,10 @@ var Interests = function () {
   };
 
   this.show = function (req, resp, params) {
-    var self = this;
+    var self = this
+      , Interest = geddy.model.Interest;
 
-    geddy.model.Interest.first(params.id, {includes: ['contribs']}, function (err, interest) {
+    Interest.first(params.id, {includes: ['karmas', 'contribs']}, function (err, interest) {
       if (err) {
         throw err;
       }
