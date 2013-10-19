@@ -64,7 +64,6 @@ var Contribs = function () {
           geddy.model.Interest.first(contrib.interestId,
               function (er, interest) {
             contrib.interest = interest;
-            geddy.log.debug(JSON.stringify(contrib))
             self.respondWith(contrib, {status: er});
           });
         }

@@ -75,7 +75,7 @@ function createItemAndSave (data, name, cb) {
 
 function createContribOrInterestWithRandomKarma (data, name, cb) {
   createItemAndSave(data, name, function (err, c) {
-    var count = ~~(Math.random(0, 10) * 200);
+    var count = ~~((Math.random(0, 10) * 200 + 1));
     for (var i = 0; i < count; i++) {
       c.addKarma(Karma.create({date: new Date()}));
     }
