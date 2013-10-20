@@ -24,6 +24,7 @@ var config = {
 , recaptcha: {
     publicKey: process.env.RECAPTCHA_PUBLIC
   , privateKey: process.env.RECAPTCHA_PRIVATE
+  , enabled: false
   }
 , port: port
 , domain: 'http://localhost:' + port

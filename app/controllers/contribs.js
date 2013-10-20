@@ -33,7 +33,7 @@ var Contribs = function () {
     });
 
     recaptcha.verify(function (success, err) {
-      if (success) {
+      if (success || !geddy.config.recaptcha.enabled) {
         contrib.save(function (er, data) {
           var success = 'Created Contribution! Thank you so much!';
           self.respondWith(contrib, {status: er || success});
