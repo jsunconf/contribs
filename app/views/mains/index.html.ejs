@@ -1,5 +1,5 @@
 <div class="col-md-6">
-  <h2>Contribs</h2>
+  <h2>Contribs <a href="<%- contribsPath %>.xml" class="pull-right icon icon-rss"></a></h2>
   <% if (contribs) { %>
   <% for (var i = 0, ii = contribs.length; i < ii; i++) { %>
     <div class="">
@@ -10,7 +10,7 @@
 </div>
 
 <div class="col-md-6">
-  <h2>Interests</h2>
+  <h2>Interests <a href="<%- interestsPath %>.xml" class="pull-right icon icon-rss"></a></h2>
   <% if (interests) { %>
   <% for (var i = 0, ii = interests.length; i < ii; i++) { %>
     <div class="">

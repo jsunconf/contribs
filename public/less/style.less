@@ -1,6 +1,8 @@
-body {
-  background: url('../img/whitey.png');
-}
+@import "bootstrap/bootstrap.less";
+
+@white: #fff;
+@brand-primary: #8f1332;
+
 body.application {
   padding-top: 60px;
   padding-bottom: 40px;
@@ -26,13 +28,6 @@ code {
   margin: 5px;
 }
 
-@media (max-width:480px) {
-  .hero-unit .pull-right {
-    float: none;
-    margin-top: 10px;
-  }
-}
-
 
 .hidden {
   display: none;
@@ -42,5 +37,8 @@ code {
   font-size: 36px;
 }
 
+@import "fontello.less";
 
-@import "bootstrap/bootstrap.less";
+.icon {
+  &:hover { text-decoration: none; }
+}
