@@ -1,18 +1,28 @@
-<div class="control-group">
-  <label for="title" class="control-label">Title</label>
-  <div class="controls">
-    <%- contentTag('input', contrib.title, {type:'text', class:'span6', name:'title'}) %>
+<div class="form-group">
+  <label for="title" class="col-lg-2 control-label">Title</label>
+  <div class="col-lg-10">
+    <%- contentTag('input', contrib.title, {type:'text', class:'form-control', name:'title'}) %>
   </div>
 </div>
-<div class="control-group">
-  <label for="contributor" class="control-label">Your Name</label>
-  <div class="controls">
-    <%- contentTag('input', contrib.contributor, {type:'text', class:'span6', name:'contributor'}) %>
+<div class="form-group">
+  <label for="contributor" class="col-lg-2 control-label">Your Name</label>
+  <div class="col-lg-10">
+    <%- contentTag('input', contrib.contributor, {type:'text', class:'form-control', name:'contributor'}) %>
   </div>
 </div>
-<div class="control-group">
-  <label for="description" class="control-label">Description</label>
-  <div class="controls">
-    <%- contentTag('textarea', contrib.description, {class: 'span6', name: 'description', rows: 10}) %>
+<div class="form-group">
+  <label for="description" class="col-lg-2 control-label">Description</label>
+  <div class="col-lg-10">
+    <%- contentTag('textarea', contrib.description, {class: 'form-control', name: 'description', rows: 10}) %>
   </div>
+</div>
+<div class="form-group">
+  <label for="recaptcha_response_field" class="col-lg-2 control-label">Captcha</label>
+  <div class="col-lg-10">
+    <%- scriptLink('/js/recaptcha.js', {type: 'text/javascript'}) %>
+    <%- recaptcha %>
+  </div>
+</div>
+<div class="col-xs-12 pad-top-10">
+  <%- contentTag('button', 'Submit', {type: 'submit', class: 'btn btn-primary pull-right'}) %>
 </div>

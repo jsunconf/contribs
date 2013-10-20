@@ -34,15 +34,16 @@ var Contribs = function () {
 
     recaptcha.verify(function (success, err) {
       if (success) {
-        contrib.save(function(er, data) {
-          self.respondWith(contrib, {status: er});
+        contrib.save(function (er, data) {
+          var success = 'Created Contribution! Thank you so much!';
+          self.respondWith(contrib, {status: er || success});
         });
       } else {
         self.flash.error('Wrong Captcha');
         var r = {
           recaptcha: recaptcha.toHTML(),
         };
-        self.respond(r, { template: 'add' });
+        self.redirect(geddy.viewHelpers.addContribPath);
       }
     });
   };
@@ -78,7 +79,7 @@ var Contribs = function () {
       , Contrib = geddy.model.Contrib
       , feed;
 
-    Contrib.all(function(err, contribs) {
+    Contrib.all(function (err, contribs) {
       feed = createFeed(contribs);
       self.output(200, {'Content-Type': 'application/xml'}, feed.render('atom-1.0'));
     });

@@ -1,8 +1,8 @@
-<form id="contrib-form" class="form-horizontal" action="/contribs" method="POST">
+<form role="form" id="contrib-form" class="form-horizontal" action="/contribs" method="POST">
   <fieldset>
-    <legend>Create a new Contrib</legend>
+    <legend>Create a new Contribution</legend>
     <% if(params.errors) { %>
-    <div class="control-group">
+    <div class="form-group">
       <ul>
       <% for(var err in params.errors) { %>
         <li><%= params.errors[err]; %></li>
@@ -11,14 +11,7 @@
     </div>
     <% } %>
 
-    <%- partial('form', {contrib: {}}) %>
-
-    <%- scriptLink('/js/recaptcha.js', {type: 'text/javascript'}) %>
-    <%- recaptcha %>
-
-    <div class="form-actions">
-      <%- contentTag('input', 'Add', {type: 'submit', class: 'btn btn-primary'}) %>
-    </div>
+    <%- partial('form', {contrib: {}, recaptcha: recaptcha}) %>
   </fieldset>
 </form>
 
