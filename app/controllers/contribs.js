@@ -1,7 +1,6 @@
 var Recaptcha = require('recaptcha').Recaptcha
   , createFeed = require(__dirname + '/../../lib/feed.js');
 
-
 var Contribs = function () {
   this.respondsWith = ['html', 'json', 'xml', 'js', 'txt'];
 
@@ -10,7 +9,7 @@ var Contribs = function () {
       , Contrib = geddy.model.Contrib;
 
     Contrib.all({}, {limit: 300},
-      function(err, contribs) {
+      function (err, contribs) {
         self.respondWith(contribs, {type:'Contrib'});
     });
   };

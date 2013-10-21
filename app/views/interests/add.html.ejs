@@ -1,6 +1,6 @@
-<form role="form" id="contrib-form" class="form-horizontal" action="/contribs" method="POST">
+<form role="form" id="interest-form" class="form-horizontal" action="/interests" method="POST">
   <fieldset>
-    <legend>Submit a new Contribution</legend>
+    <legend>Submit a new Interest</legend>
     <% if(params.errors) { %>
     <div class="form-group">
       <ul>
@@ -11,8 +11,6 @@
     </div>
     <% } %>
 
-    <%- partial('form', {contrib: {}, recaptcha: recaptcha}) %>
+    <%- partial('form', {interest: {}, recaptcha: recaptcha}) %>
   </fieldset>
 </form>
-
-

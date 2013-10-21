@@ -5,27 +5,45 @@ var Interests = function () {
   this.respondsWith = ['html', 'json', 'xml', 'js', 'txt'];
 
   this.index = function (req, resp, params) {
-    var self = this;
+    var self = this
+      , Interest = geddy.model.Interest;
 
-    geddy.model.Interest.all({}, {limit: 300},
+    Interest.all({}, {limit: 300},
       function (err, interests) {
         self.respondWith(interests, {type: 'Interest'});
     });
   };
 
   this.add = function (req, resp, params) {
-    this.respond({params: params});
+    var config = geddy.config
+      , recaptcha = new Recaptcha(config.recaptcha.publicKey, config.recaptcha.privateKey);
+    this.respond({ recaptcha: recaptcha.toHTML() });
   };
 
   this.create = function (req, resp, params) {
     var self = this
-      , interest = geddy.model.Interest.create(params);
+      , interest = geddy.model.Interest.create(params)
+      , config = geddy.config;
 
-    interest.save(function (err, data) {
-      if (err) {
-        throw err;
+    var recaptcha = new Recaptcha(config.recaptcha.publicKey, config.recaptcha.privateKey, {
+      remoteip: req.connection.remoteAddress,
+      challenge: params.recaptcha_challenge_field,
+      response: params.recaptcha_response_field
+    });
+
+    recaptcha.verify(function (success, err) {
+      if (success || !geddy.config.recaptcha.enabled) {
+        interest.save(function (er, data) {
+          var success = 'Created Interest! Thank you so much!';
+          self.respondWith(interest, {status: er || success});
+        });
+      } else {
+        self.flash.error('Wrong Captcha');
+        var r = {
+          recaptcha: recaptcha.toHTML(),
+        };
+        self.redirect(geddy.viewHelpers.addInterestPath);
       }
-      self.respondWith(interest, {status: err});
     });
   };
 
@@ -60,4 +78,3 @@ var Interests = function () {
 };
 
 exports.Interests = Interests;
-
