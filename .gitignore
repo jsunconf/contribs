@@ -10,8 +10,6 @@ coverage.html
 .idea
 lib-cov
 
-secrets.json
-
 log/*
 
 node_modules/jake
