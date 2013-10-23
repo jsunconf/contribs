@@ -3,7 +3,7 @@
 var $votes = $('#votes')
     $form = $('#form-karma');
 
-$form.on('submit', function (e){
+$form.on('submit', function (e) {
   e.preventDefault();
 
   $form
@@ -22,6 +22,12 @@ $form.on('submit', function (e){
       $votes.text(count);
     }
   });
+});
+
+// Logo
+var $logo = $('#logo');
+$logo.on('hover', function () {
+  $logo.toggleClass('show-back');
 });
 
 })(jQuery, window);

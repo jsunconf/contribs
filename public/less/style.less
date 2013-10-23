@@ -39,6 +39,7 @@
   &:hover { text-decoration: none; }
 }
 
+
 body.application {
   padding-top: 60px;
   padding-bottom: 40px;
@@ -153,9 +154,111 @@ header.site {
   .pull-left {
     padding-left: 5%;
   }
+}
+
+
+
+.c {
+  width: 150px;
+  height: 150px;
+  position: relative;
+  margin: 0 0 40px;
+  -webkit-perspective: 1200px;
+     -moz-perspective: 1200px;
+       -o-perspective: 1200px;
+          perspective: 1200px;
+}
+
+#logo {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  -webkit-transform-style: preserve-3d;
+     -moz-transform-style: preserve-3d;
+       -o-transform-style: preserve-3d;
+          transform-style: preserve-3d;
+  -webkit-transition: -webkit-transform 1s;
+     -moz-transition: -moz-transform 1s;
+       -o-transition: -o-transform 1s;
+          transition: transform 1s;
+}
+
+#logo figure {
+  display: block;
+  position: absolute;
+  line-height: 196px;
+  font-size: 90px;
+  text-align: center;
+  font-weight: bold;
+  color: white;
+  border: 1px solid @white;
 
 }
 
-.logo {
-  border: 1px solid @white;
+#logo .front,
+#logo .back {
+  width: 150px;
+  height: 150px;
+}
+
+#logo .top,
+#logo .bottom {
+  width: 150px;
+  height: 150px;
+  top: 0px;
+  line-height: 96px;
+}
+
+#logo .front  { background: url('/img/logo-150.png'); }
+#logo .back   { background: url('/img/logo-150.png'); }
+#logo .top    { background: url('/img/logo-150.png'); }
+#logo .bottom { background: url('/img/logo-150.png'); }
+
+#logo .front  {
+  -webkit-transform: translateZ( 75px );
+     -moz-transform: translateZ( 75px );
+       -o-transform: translateZ( 75px );
+          transform: translateZ( 75px );
+}
+#logo .back   {
+  -webkit-transform: rotateX( -180deg ) translateZ(  75px );
+     -moz-transform: rotateX( -180deg ) translateZ(  75px );
+       -o-transform: rotateX( -180deg ) translateZ(  75px );
+          transform: rotateX( -180deg ) translateZ(  75px );
+}
+#logo .top {
+  -webkit-transform: rotateX(   90deg ) translateZ( 75px );
+     -moz-transform: rotateX(   90deg ) translateZ( 75px );
+       -o-transform: rotateX(   90deg ) translateZ( 75px );
+          transform: rotateX(   90deg ) translateZ( 75px );
+}
+#logo .bottom {
+  -webkit-transform: rotateX(  -90deg ) translateZ( 75px );
+     -moz-transform: rotateX(  -90deg ) translateZ( 75px );
+       -o-transform: rotateX(  -90deg ) translateZ( 75px );
+          transform: rotateX(  -90deg ) translateZ( 75px );
+}
+#logo.show-front {
+  -webkit-transform: translateZ(  -75px );
+     -moz-transform: translateZ(  -75px );
+       -o-transform: translateZ(  -75px );
+          transform: translateZ(  -75px );
+}
+#logo.show-back {
+  -webkit-transform: translateZ( -75px ) rotateX( -180deg );
+     -moz-transform: translateZ( -75px ) rotateX( -180deg );
+       -o-transform: translateZ( -75px ) rotateX( -180deg );
+          transform: translateZ( -75px ) rotateX( -180deg );
+}
+#logo.show-top {
+  -webkit-transform: translateZ( -75px ) rotateX(  -90deg );
+     -moz-transform: translateZ( -75px ) rotateX(  -90deg );
+       -o-transform: translateZ( -75px ) rotateX(  -90deg );
+          transform: translateZ( -75px ) rotateX(  -90deg );
+}
+#logo.show-bottom {
+  -webkit-transform: translateZ( -75px ) rotateX(   90deg );
+     -moz-transform: translateZ( -75px ) rotateX(   90deg );
+       -o-transform: translateZ( -75px ) rotateX(   90deg );
+          transform: translateZ( -75px ) rotateX(   90deg );
 }
