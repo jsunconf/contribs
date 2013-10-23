@@ -1,18 +1,36 @@
 <%= partial('layout_header'); %>
   <body>
-    <div class="container">
-
-      <div class="navbar navbar-default">
-        <div class="navbar-inner">
-          <ul class="nav navbar-nav">
-            <li><%- linkTo('Main', mainsPath) %></li>
-            <li><%- linkTo('Contribs', contribsPath) %></li>
-            <li><%- linkTo('Interests', interestsPath) %></li>
-            <li><%- linkTo('Imprint', imprintsPath) %></li>
+    <div class="wrapper">
+      <header class="site">
+        <div class="container">
+          <a href="/">
+            <img class="logo" src="/img/logo-150.png" />
+          </a>
+        </div>
+      </header>
+      <nav class="menu">
+        <div class="text-center">
+          <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="http://jsunconf.eu">JS Unconf</a></li>
           </ul>
         </div>
-      </div>
+      </nav>
       <%- displayFlash(flash); %>
-      <%- render(); %>
+      <div class="container content">
+        <%- render(); %>
+      </div>
+      <footer class="footer">
+        <div class="container">
+          <ul class="hidden-xs pull-left">
+            <li>made with &hearts; and Node.js</li>
+          </ul>
+          <ul class="pull-right">
+            <li><%- linkTo('Imprint', imprintsPath) %></li>
+            <li><%- linkTo('@jsunconf', 'http://twitter.com/jsunconf') %></li>
+          </ul>
+        <div>
+      </footer>
     </div>
+
 <%= partial('layout_footer'); %>

@@ -30,6 +30,14 @@
 
 @white: #fff;
 @brand-primary: #8f1332;
+@brand: #92137F;
+
+@import "fontello.less";
+
+.icon {
+  font-size: 25px;
+  &:hover { text-decoration: none; }
+}
 
 body.application {
   padding-top: 60px;
@@ -56,7 +64,6 @@ code {
   margin: 5px;
 }
 
-
 .hidden {
   display: none;
 }
@@ -69,8 +76,86 @@ code {
   padding-top: 10px;
 }
 
-@import "fontello.less";
+html,
+body {
+  margin-bottom: 0px;
+  height: 100%;
+  padding-bottom: 0px;
+}
 
-.icon {
-  &:hover { text-decoration: none; }
+.wrapper {
+  height: auto !important;
+  min-height: 100%;
+  height: 100%;
+  position: relative;
+  width: 100%;
+}
+
+.menu {
+  padding: 10px 0;
+  margin-bottom: 30px;
+  background: @brand-primary;
+  font-size: 18px;
+  line-height: 1.6;
+  color: @white;
+  a {
+    color: @white;
+    text-transform: uppercase;
+    margin: 0 0.2em;
+    padding: 0 0.3em;
+  }
+  ul, li {
+    list-style-type: none;
+    display: inline-block;
+    margin: 0;
+    padding-left: 0px;
+  }
+}
+
+header.site {
+  background: url('/img/header.jpg') no-repeat scroll center center / cover;
+  border-bottom: 1px solid @brand;
+  padding-bottom: 20px;
+  padding-top: 20px;
+}
+
+.content {
+  padding-bottom: 70px;
+}
+
+.footer {
+  height: 60px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: @brand-primary;
+  color: @white;
+  ul, li {
+    list-style-type: none;
+    display: inline-block;
+    margin: 0px;
+  }
+  li+li {
+    margin-left: 15px;
+  }
+  li {
+    padding-top: 20px;
+    margin-left: 0px;
+    a {
+      color: @white;
+      &:hover { text-decoration: none; }
+    }
+  }
+  .pull-right {
+    padding-right: 5%;
+  }
+  .pull-left {
+    padding-left: 5%;
+  }
+
+}
+
+.logo {
+  border: 1px solid @white;
 }
