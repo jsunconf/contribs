@@ -14,10 +14,11 @@
   "dependencies": {
     "pg": "~2.7.0",
     "recaptcha": "~1.2.0",
-    "feed": "~0.2.5"
+    "feed": "~0.2.5",
+    "geddy": "~0.10.5",
+    "jake": "~0.7.2"
   },
   "devDependencies": {
-    "jake": "~0.7.2",
     "less": "~1.4.2",
     "grunt": "~0.4.1",
     "grunt-contrib-less": "~0.7.0",
@@ -29,6 +30,6 @@
   "bundleDependencies": [],
   "license": "BSD",
   "engines": {
-    "node": "0.8.x"
+    "node": "0.10.x"
   }
 }
