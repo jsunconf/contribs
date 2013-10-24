@@ -141,7 +141,10 @@ function cleanUp (cb) {
     if (relation) {
       relation.all(function (err, data) {
         var ids = [];
-        if (err) { throw err; }
+        if (err) {
+          return cb(err);
+        }
+
         if (!data || !data.length) { return doIt(); }
         data.forEach(function (item) {
           ids.push(item.id);

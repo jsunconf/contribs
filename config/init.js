@@ -16,7 +16,11 @@ var init = function(cb) {
     return cb();
   }
 
-  testHelper.cleanUp(function () {
+  testHelper.cleanUp(function (err) {
+    if (err) {
+      geddy.log.error('db error, skipping fixture setup');
+      return cb();
+    }
     testHelper.seedDb(cb);
   });
 
