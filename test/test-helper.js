@@ -91,12 +91,12 @@ function seed (cb) {
   var listCopy = fixtures.slice();
 
   var assignContribsToInterests = function (cb) {
-    Interest.all(function (err, interests) {
-      Contrib.all(function (err, data) {
+    Interest.all(function (err, i) {
+      Contrib.all(function (err, c) {
         var addContrib = function () {
-          var interest = interests.shift();
+          var interest = i.shift();
           if (interest) {
-            var contrib = contribs.shift();
+            var contrib = c.shift();
             Contrib.load(contrib.id, function (err, c) {
               Interest.load(interest.id, function (err, i) {
                 i.addContrib(c);
@@ -142,6 +142,7 @@ function cleanUp (cb) {
       relation.all(function (err, data) {
         var ids = [];
         if (err) {
+          console.error(err)
           return cb(err);
         }
 
