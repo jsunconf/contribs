@@ -11,10 +11,10 @@
       <span id="votes"><%= contrib.karmas && contrib.karmas.length || 0 %></span> Votes
     <p>
     <% if (contrib.interest) { %>
-    <p>
+    <p class="response-info">
       This is a response to the request
       <% var linktitle = contrib.interest.title + ' from ' + contrib.interest.prospect; %>
-      <%- linkTo(linktitle, interestPath(contrib.interest.id)); %>
+      <%- linkTo(linktitle, interestPath(contrib.interest.id), {class: 'response-link'}); %>
     </p>
     <% } %>
   </div>

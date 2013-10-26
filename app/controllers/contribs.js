@@ -15,9 +15,19 @@ var Contribs = function () {
   };
 
   this.add = function (req, resp, params) {
-    var config = geddy.config
-      , recaptcha = new Recaptcha(config.recaptcha.publicKey, config.recaptcha.privateKey);
-    this.respond({ recaptcha: recaptcha.toHTML() });
+    var self = this
+      , config = geddy.config
+      , recaptcha = new Recaptcha(config.recaptcha.publicKey, config.recaptcha.privateKey)
+      , Interest = geddy.model.Interest
+      , interest;
+
+    if (params.interest_id) {
+      Interest.first(params.interest_id, function (err, interest) {
+        self.respond({ recaptcha: recaptcha.toHTML(), interest: interest });
+      });
+    } else {
+      self.respond({ recaptcha: recaptcha.toHTML(), interest: interest });
+    }
   };
 
   this.create = function (req, resp, params) {

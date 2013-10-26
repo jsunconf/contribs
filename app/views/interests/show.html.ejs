@@ -12,13 +12,21 @@
     <p>
     <% if (interest.contribs) { %>
     <p>
-      </h3>This interest got responses:</h3>
+      <h3>This interest got responses:</h3>
+      <ul class="response-list">
       <% for (var i = 0, ii = interest.contribs.length; i < ii; i++) { %>
         <% var linktitle = interest.contribs[i].title + ' by ' + interest.contribs[i].contributor; %>
-        <%- linkTo(linktitle, contribPath(interest.contribs[i].id)); %>
+        <li><%- linkTo(linktitle, contribPath(interest.contribs[i].id)); %></li>
       <% } %>
+      </ul>
     </p>
     <% } %>
   </div>
   <%= partial('shared/_votes', {params: {id : interest.id, type: 'interest'}}) %>
+  <div class="col-md-4 pad-top-10">
+    <form id="form-respond" action="/contribs/add" method="GET">
+      <button type="submit" class="btn btn-primary btn-lg btn-block vote-responses-link">respond with a talk</button>
+      <input type="hidden" name="interest_id" value="<%= interest.id %>" />
+    </form>
+  </div>
 </div>

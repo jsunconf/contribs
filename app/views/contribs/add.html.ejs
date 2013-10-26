@@ -1,10 +1,14 @@
 <form role="form" id="contrib-form" class="form-horizontal" action="/contribs" method="POST">
   <fieldset>
+    <% if (interest && interest.id) { %>
+    <legend>Submit a new Contribution as response to <i><%= interest.title %></i></legend>
+    <% } else { %>
     <legend>Submit a new Contribution</legend>
-    <% if(params.errors) { %>
+    <% } %>
+    <% if (params.errors) { %>
     <div class="form-group">
       <ul>
-      <% for(var err in params.errors) { %>
+      <% for (var err in params.errors) { %>
         <li><%= params.errors[err]; %></li>
       <% } %>
       </ul>
@@ -12,6 +16,9 @@
     <% } %>
 
     <%- partial('form', {contrib: {}, recaptcha: recaptcha}) %>
+    <% if (interest && interest.id) { %>
+    <input type="hidden" name="interest_id" value="<%= interest.id %>" />
+    <% } %>
   </fieldset>
 </form>
 
