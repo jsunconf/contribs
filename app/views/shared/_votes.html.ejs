@@ -1,6 +1,9 @@
 <div class="col-md-4">
   <form id="form-karma" action="/karmas/" method="POST">
-    <button id="vote-for-link" type="submit" class="btn btn-primary btn-lg btn-block vote-responses-link"><i class="icon-heart"></i> vote</button>
+    <button <%- params.hasVoted ? ' disabled="disabled" ' : '' %> id="vote-for-link" type="submit" class="btn btn-primary btn-lg btn-block vote-responses-link">
+      <% if (!params.hasVoted) { %> <i class="icon-heart"></i> <% } %>
+      <%- params.hasVoted ? 'Thanks!' : ' vote' %>
+    </button>
     <input type="hidden" name="type" value="<%= params.type %>" />
     <input type="hidden" name="<%= params.type %>_id" value="<%= params.id %>" />
   </form>

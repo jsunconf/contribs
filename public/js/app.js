@@ -8,7 +8,8 @@ $form.on('submit', function (e) {
 
   $form
     .find('button')
-    .text('Thanks!');
+    .text('Thanks!')
+    .prop('disabled', true);
 
   $.ajax({
     type: 'POST',

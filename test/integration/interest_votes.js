@@ -8,7 +8,7 @@ var wd = require('wd')
 var testhelper = require(__dirname + '/../test-helper.js');
 var s = testhelper.selenium;
 
-var browser = wd.promiseRemote();
+var browser = wd.promiseChainRemote();
 
 browser.on('status', function (info) {
   console.log(info.cyan);
@@ -17,6 +17,8 @@ browser.on('status', function (info) {
 browser.on('command', function (meth, path, data) {
   console.log(' > ' + meth.yellow, path.grey, data || '');
 });
+
+var testVoting = require('./_shared.js').testVoting;
 
 tests = {
 
@@ -28,44 +30,20 @@ tests = {
     s.stop(next);
   },
 
-  'Interests have votes and when I vote the vote is saved': function (next) {
-    var voteCount;
-    browser.init({
-        browserName: 'firefox'
-      , name: 'test'
-    }).then(function () {
-        return browser.get(s.url);
-    }).then(function () {
-        return browser.elementByLinkText('JS as compilation target');
-    }).then(function (el) {
-        return browser.clickElement(el);
-    }).then(function () {
-        return browser.eval('window.location.href');
-    }).then(function (href) {
-        assert.ok(href.indexOf('interests') !== -1);
-    }).then(function () {
-        return browser.elementsById('votes');
-    }).then(function (el) {
-        return el[0].text();
-    }).then(function (text) {
-      voteCount = +text;
-      assert.ok(voteCount !== 0);
-    }).then(function () {
-      return browser.elementsById('vote-for-link');
-    }).then(function (el) {
-        return browser.clickElement(el);
-    }).then(function () {
-        return browser.refresh();
-    }).then(function () {
-        return browser.elementsById('votes');
-    }).then(function (el) {
-        return el[0].text();
-    }).then(function (text) {
-      assert.equal(+text, voteCount + 1);
-    }).fin(function () {
+  'Interests have votes and when I vote the vote is saved, after that I can not vote again': function (next) {
+    browser.init({browserName: 'firefox'})
+      .get(s.url)
+      .elementByLinkText('JS as compilation target')
+      .click()
+      .eval('window.location.href')
+      .then(function (href) {
+        return assert.ok(href.indexOf('interests') !== -1);
+      })
+      .then(testVoting(browser))
+      .fin(function () {
         browser.quit();
         next();
-    }).done();
+      }).done();
   },
 
 

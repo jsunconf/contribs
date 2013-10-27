@@ -1,5 +1,7 @@
 var Recaptcha = require('recaptcha').Recaptcha
-  , createFeed = require(__dirname + '/../../lib/feed.js');
+  , createFeed = require(__dirname + '/../../lib/feed.js')
+  , getCreatedKey = require(__dirname + '/../../lib/session-keys.js').getCreatedKey
+  , getVotedKey = require(__dirname + '/../../lib/session-keys.js').getVotedKey;
 
 var Contribs = function () {
   this.respondsWith = ['html', 'json', 'xml', 'js', 'txt'];
@@ -45,7 +47,7 @@ var Contribs = function () {
       if (success || !geddy.config.recaptcha.enabled) {
         contrib.save(function (er, data) {
           var success = 'Created Contribution! Thank you so much!';
-          self.session.set(contrib.id, 'created');
+          self.session.set(getCreatedKey(contrib.id), 'c');
           self.redirect(geddy.viewHelpers.contribPath(contrib.id));
         });
       } else {
@@ -61,7 +63,8 @@ var Contribs = function () {
   this.show = function (req, resp, params) {
     var self = this
       , Contrib = geddy.model.Contrib
-      , created = self.session.get(params.id);
+      , created = self.session.get(getCreatedKey(params.id))
+      , voted = self.session.get(getVotedKey(params.id));
 
     Contrib.first(params.id, {includes: ['karmas']},
         function (err, contrib) {
@@ -73,12 +76,12 @@ var Contribs = function () {
       }
       else {
         if (!contrib.interestId) {
-          self.respond({contrib: contrib, status: err, showTweetButton: created});
+          self.respond({contrib: contrib, status: err, showTweetButton: created, hasVoted: voted});
         } else {
           geddy.model.Interest.first(contrib.interestId,
               function (er, interest) {
             contrib.interest = interest;
-            self.respond({contrib: contrib, status: er, showTweetButton: created});
+            self.respond({contrib: contrib, status: er, showTweetButton: created, hasVoted: voted});
           });
         }
       }

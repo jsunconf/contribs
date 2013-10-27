@@ -43,7 +43,7 @@ var config = {
 , sessions: {
     store: 'cookie'
   , key: 'sid'
-  , expiry: 14 * 24 * 60 * 60
+  , expiry: 1 * 24 * 60 * 60
   }
 };
 

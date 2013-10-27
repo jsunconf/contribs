@@ -1,5 +1,6 @@
 var Recaptcha = require('recaptcha').Recaptcha
-  , createFeed = require(__dirname + '/../../lib/feed.js');
+  , createFeed = require(__dirname + '/../../lib/feed.js')
+  , getVotedKey = require(__dirname + '/../../lib/session-keys.js').getVotedKey;
 
 var Interests = function () {
   this.respondsWith = ['html', 'json', 'xml', 'js', 'txt'];
@@ -49,7 +50,8 @@ var Interests = function () {
 
   this.show = function (req, resp, params) {
     var self = this
-      , Interest = geddy.model.Interest;
+      , Interest = geddy.model.Interest
+      , voted = self.session.get(getVotedKey(params.id));
 
     Interest.first(params.id, {includes: ['karmas', 'contribs']}, function (err, interest) {
       if (err) {
@@ -59,7 +61,7 @@ var Interests = function () {
         throw new geddy.errors.NotFoundError();
       }
       else {
-        self.respondWith(interest);
+        self.respond({interest: interest, hasVoted: voted});
       }
     });
   };

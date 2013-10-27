@@ -25,7 +25,6 @@ var config = {
   , enabled: true
   }
 , port: process.env.PORT || 4000
-, domain: 'http://localhost'
 , model: {
     defaultAdapter: 'postgres'
   }
@@ -37,6 +36,11 @@ var config = {
     , host: process.env.DB_HOST
     , port: process.env.DB_PORT
     }
+  }
+, sessions: {
+    store: 'cookie'
+  , key: 'sid'
+  , expiry: 6 * 30 * 24 * 60 * 60
   }
 };
 
