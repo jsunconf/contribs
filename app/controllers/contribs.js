@@ -45,7 +45,8 @@ var Contribs = function () {
       if (success || !geddy.config.recaptcha.enabled) {
         contrib.save(function (er, data) {
           var success = 'Created Contribution! Thank you so much!';
-          self.respondWith(contrib, {status: er || success});
+          self.session.set(contrib.id, 'created');
+          self.redirect(geddy.viewHelpers.contribPath(contrib.id));
         });
       } else {
         self.flash.error('Wrong Captcha');
@@ -59,7 +60,8 @@ var Contribs = function () {
 
   this.show = function (req, resp, params) {
     var self = this
-      , Contrib = geddy.model.Contrib;
+      , Contrib = geddy.model.Contrib
+      , created = self.session.get(params.id);
 
     Contrib.first(params.id, {includes: ['karmas']},
         function (err, contrib) {
@@ -71,12 +73,12 @@ var Contribs = function () {
       }
       else {
         if (!contrib.interestId) {
-          self.respondWith(contrib);
+          self.respond({contrib: contrib, status: err, showTweetButton: created});
         } else {
           geddy.model.Interest.first(contrib.interestId,
               function (er, interest) {
             contrib.interest = interest;
-            self.respondWith(contrib, {status: er});
+            self.respond({contrib: contrib, status: er, showTweetButton: created});
           });
         }
       }

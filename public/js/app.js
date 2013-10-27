@@ -8,7 +8,7 @@ $form.on('submit', function (e) {
 
   $form
     .find('button')
-    .html('Thanks &hearts;');
+    .text('Thanks!');
 
   $.ajax({
     type: 'POST',

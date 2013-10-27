@@ -19,4 +19,11 @@
     <% } %>
   </div>
   <%= partial('shared/_votes', {params: {id : contrib.id, type: 'contrib'}}) %>
+  <% if (showTweetButton) { %>
+  <div class="col-md-4 pad-top-10">
+    <a href="http://twitter.com/home?status=<%= getTweetText(contrib.id); %>" target="_blank" id="tweet-contrib" type="submit" class="btn btn-primary btn-lg btn-block vote-responses-link">
+      <i class="icon-twitter" ></i>Tweet about your talk
+    </a>
+  </div>
+  <% } %>
 </div>
