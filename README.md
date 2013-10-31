@@ -47,6 +47,9 @@ heroku config:set GEDDY_SECRET=$YOUR_KEY # generate one with `geddy gen secret` 
 After the first deploy prepare the Postgres DB
 
 ```
+
+
+```
 heroku run geddy jake db:init environment=production
 heroku run geddy jake db:migrate environment=production # until: (No migrations to run)
 ```
