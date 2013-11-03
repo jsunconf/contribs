@@ -30,6 +30,12 @@ function testVoting (browser) {
       })
       .elementById('vote-for-link')
       .click()
+      .sleep(1000)
+      .elementById('votes')
+      .text()
+      .then(function (text) {
+        return assert.equal(+text, voteCount + 1);
+      })
       .refresh()
       .elementById('votes')
       .text()
