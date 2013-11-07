@@ -12,11 +12,13 @@ lib-cov
 
 log/*
 
-node_modules/jake
-node_modules/.bin/jake
-node_modules/.bin/lessc
-node_modules/less
-node_modules/grunt*
+node_modules/pg
+node_modules/grunt-contrib-uglify
+node_modules/grunt-contrib-watch
+node_modules/colors
+node_modules/async-minihelper
+node_modules/wd
+
 
 public/css/*
 test/bin/selenium-server-standalone-2.37.0.jar
