@@ -28,7 +28,15 @@
     "colors": "~0.6.2",
     "async-minihelper": "~1.0.0"
   },
-  "bundleDependencies": [],
+  "bundleDependencies": [
+    "recaptcha",
+    "feed",
+    "geddy",
+    "jake",
+    "less",
+    "grunt",
+    "grunt-contrib-less"
+  ],
   "license": "BSD",
   "engines": {
     "node": "0.10.x"
