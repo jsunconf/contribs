@@ -26,7 +26,7 @@ var config = {
   }
 , port: process.env.PORT || 4000
 , model: {
-    defaultAdapter: 'postgres'
+    defaultAdapter: 'mysql'
   }
 , db: {
     postgres: {

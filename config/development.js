@@ -29,11 +29,11 @@ var config = {
 , port: port
 , domain: 'http://localhost:' + port
 , model: {
-    defaultAdapter: 'postgres'
+    defaultAdapter: 'mysql'
   }
 , db: {
-    postgres: {
-        port: 5432
+    mysql: {
+        port: 3306
       , password: 'geddy'
       , database: 'geddy'
       , host: 'localhost'
