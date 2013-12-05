@@ -29,12 +29,12 @@ var config = {
     defaultAdapter: 'mysql'
   }
 , db: {
-    postgres: {
-      user: process.env.DB_USER
+    mysql: {
+      user: process.env.RDS_USERNAME
     , database: process.env.DB_DATABASE
-    , password: process.env.DB_PW
-    , host: process.env.DB_HOST
-    , port: process.env.DB_PORT
+    , password: process.env.RDS_PASSWORD
+    , host: process.env.RDS_HOSTNAME
+    , port: process.env.RDS_PORT
     }
   }
 , sessions: {
