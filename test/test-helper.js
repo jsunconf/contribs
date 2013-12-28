@@ -53,7 +53,7 @@ exports.selenium = {
 
 function createItem (data, name) {
   var i;
-  if (!data) {
+  if (!data) {
     data = fixtureObj[name][0];
   }
   i = geddy.model[name].create(data);
@@ -67,7 +67,7 @@ function createItemAndSave (data, name, cb) {
     c = createItem(null, name);
   } else if (data === null) {
     c = createItem(null, name);
-  } else {
+  } else {
     c = createItem(data, name);
   }
   c.save(cb);
