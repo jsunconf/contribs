@@ -21,6 +21,6 @@ node_modules/wd
 
 
 public/css/*
-test/bin/selenium-server-standalone-2.37.0.jar
+test/bin/selenium-server-standalone*.jar
 
 .elasticbeanstalk/

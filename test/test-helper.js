@@ -32,7 +32,7 @@ exports.selenium = {
     this.app.on('close', cb);
   }
 , startSeleniumServer: function (cb) {
-    this.server = spawn('java', ['-jar', 'selenium-server-standalone-2.37.0.jar'],
+    this.server = spawn('java', ['-jar', 'selenium-server-standalone-2.39.0.jar'],
         {cwd: __dirname + '/bin'});
     this.server.stdout.on('data', function (data) {
       if (data.toString().indexOf('Started HttpContext[/wd,/wd]') !== -1) {
