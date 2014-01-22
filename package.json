@@ -16,7 +16,7 @@
     "feed": "~0.2.5",
     "geddy": "~0.11.1",
     "jake": "~0.7.3",
-    "mysql": "2.0.x"
+    "mysql": "~2.0.1"
   },
   "devDependencies": {
     "grunt": "~0.4.1",
