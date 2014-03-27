@@ -15,7 +15,7 @@
     "feed": "~0.2.5",
     "geddy": "^0.12.7",
     "jake": "~0.7.3",
-    "mysql": "~2.0.1",
+    "mysql": "~2.1.1",
     "recaptcha": "~1.2.0"
   },
   "devDependencies": {
