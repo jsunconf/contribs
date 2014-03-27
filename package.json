@@ -19,13 +19,13 @@
     "recaptcha": "~1.2.0"
   },
   "devDependencies": {
+    "async-minihelper": "~1.0.0",
+    "colors": "~0.6.2",
     "grunt": "~0.4.1",
     "grunt-contrib-less": "~0.7.0",
     "grunt-contrib-uglify": "~0.2.4",
     "grunt-contrib-watch": "~0.5.3",
-    "less": "~1.4.2",
-    "colors": "~0.6.2",
-    "async-minihelper": "~1.0.0",
+    "less": "~1.7.0",
     "wd": "~0.2.2"
   },
   "bundleDependencies": [

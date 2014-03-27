@@ -1,10 +1,19 @@
 (function (tree) {
-    tree.importVisitor = function(importer, finish, evalEnv) {
+    tree.importVisitor = function(importer, finish, evalEnv, onceFileDetectionMap, recursionDetector) {
         this._visitor = new tree.visitor(this);
         this._importer = importer;
         this._finish = finish;
         this.env = evalEnv || new tree.evalEnv();
         this.importCount = 0;
+        this.onceFileDetectionMap = onceFileDetectionMap || {};
+        this.recursionDetector = {};
+        if (recursionDetector) {
+            for(var fullFilename in recursionDetector) {
+                if (recursionDetector.hasOwnProperty(fullFilename)) {
+                    this.recursionDetector[fullFilename] = true;
+                }
+            }
+        }
     };
 
     tree.importVisitor.prototype = {
@@ -27,9 +36,10 @@
         },
         visitImport: function (importNode, visitArgs) {
             var importVisitor = this,
-                evaldImportNode;
-
-            if (!importNode.css) {
+                evaldImportNode,
+                inlineCSS = importNode.options.inline;
+            
+            if (!importNode.css || inlineCSS) {
 
                 try {
                     evaldImportNode = importNode.evalForImport(this.env);
@@ -41,13 +51,31 @@
                     importNode.error = e;
                 }
 
-                if (evaldImportNode && !evaldImportNode.css) {
+                if (evaldImportNode && (!evaldImportNode.css || inlineCSS)) {
                     importNode = evaldImportNode;
                     this.importCount++;
                     var env = new tree.evalEnv(this.env, this.env.frames.slice(0));
-                    this._importer.push(importNode.getPath(), importNode.currentFileInfo, function (e, root, imported) {
+
+                    if (importNode.options.multiple) {
+                        env.importMultiple = true;
+                    }
+
+                    this._importer.push(importNode.getPath(), importNode.currentFileInfo, importNode.options, function (e, root, importedAtRoot, fullPath) {
                         if (e && !e.filename) { e.index = importNode.index; e.filename = importNode.currentFileInfo.filename; }
-                        if (imported && !importNode.options.multiple) { importNode.skip = imported; }
+
+                        if (!env.importMultiple) { 
+                            if (importedAtRoot) {
+                                importNode.skip = true;
+                            } else {
+                                importNode.skip = function() {
+                                    if (fullPath in importVisitor.onceFileDetectionMap) {
+                                        return true;
+                                    }
+                                    importVisitor.onceFileDetectionMap[fullPath] = true;
+                                    return false;
+                                }; 
+                            }
+                        }
 
                         var subFinish = function(e) {
                             importVisitor.importCount--;
@@ -59,11 +87,18 @@
 
                         if (root) {
                             importNode.root = root;
-                            new(tree.importVisitor)(importVisitor._importer, subFinish, env)
-                                .run(root);
-                        } else {
-                            subFinish();
+                            importNode.importedFilename = fullPath;
+                            var duplicateImport = importedAtRoot || fullPath in importVisitor.recursionDetector;
+
+                            if (!inlineCSS && (env.importMultiple || !duplicateImport)) {
+                                importVisitor.recursionDetector[fullPath] = true;
+                                new(tree.importVisitor)(importVisitor._importer, subFinish, env, importVisitor.onceFileDetectionMap, importVisitor.recursionDetector)
+                                    .run(root);
+                                return;
+                            }
                         }
+
+                        subFinish();
                     });
                 }
             }
