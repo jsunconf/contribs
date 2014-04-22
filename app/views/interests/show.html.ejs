@@ -22,11 +22,7 @@
     </p>
     <% } %>
   </div>
-  <%= partial('shared/_votes', {params: {id : interest.id, type: 'interest', hasVoted: hasVoted}}); %>
   <div class="col-md-4 pad-top-10">
-    <form id="form-respond" action="/contribs/add" method="GET">
-      <button type="submit" class="btn btn-primary btn-lg btn-block vote-responses-link">respond with a talk</button>
-      <input type="hidden" name="interest_id" value="<%= interest.id %>" />
-    </form>
+
   </div>
 </div>
